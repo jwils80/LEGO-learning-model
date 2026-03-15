@@ -1,0 +1,918 @@
+/* =========================================================================
+   LEGO Learning Model - Explainer CSS
+   Editorial, structured layout with visual pacing and a "layered" logic.
+   ========================================================================= */
+
+/* --- 1. Root Variables (The Model Color Palette) --- */
+:root {
+    /* Learning Phase Colors */
+    --color-foundation: #9CA3AF;   /* Darker Gray / Prior Knowledge */
+    --color-introduce: #FACC15;    /* Pop of yellow / New Info */
+    --color-connect: #16A34A;      /* Growth green / Reinforce */
+    --color-expand: #2563EB;       /* Deep blue / Deepen */
+    --color-reflect: #F97316;      /* Orange / Eval */
+    
+    /* Document Colors */
+    --color-bg-base: #FFFFFF;
+    --color-bg-alt: #F9FAFB;
+    --color-text-main: #111827;
+    --color-text-secondary: #6B7280;
+
+    /* Typographic System */
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Modular Spacing (Pacing) */
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-8: 2rem;
+    --space-16: 4rem;
+    --space-24: 6rem;
+    
+    /* Layout Tokens */
+    --max-width: 1040px;
+    --radius-brick: 6px;
+    --radius-card: 12px;
+    
+    /* Visual Shadows / Depths */
+    --shadow-float: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --shadow-brick: 0 8px 0px rgba(0,0,0,0.1), inset 0 2px 0px rgba(255,255,255,0.4);
+    --shadow-brick-hover: 0 4px 0px rgba(0,0,0,0.1), inset 0 2px 0px rgba(255,255,255,0.4);
+}
+
+/* --- 2. Baseline Reset --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-main);
+    background-color: var(--color-bg-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* --- 3. Typography Hierarchy --- */
+h1, h2, h3, h4, .logo, .subtitle, .finding-number {
+    font-family: var(--font-heading);
+    color: var(--color-text-main);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 3vw, 2.5rem); letter-spacing: -0.01em; margin-bottom: var(--space-4); }
+h3 { font-size: 1.5rem; margin-bottom: var(--space-2); }
+h4 { font-size: 1.125rem; font-weight: 600; }
+
+p {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+.lead {
+    font-size: 1.5rem;
+    color: var(--color-text-main);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.large-text {
+    font-size: 1.25rem;
+    color: var(--color-text-main);
+    font-weight: 400;
+}
+
+a {
+    color: var(--color-expand);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-connect);
+}
+
+/* --- 4. Structural Layout --- */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-8);
+}
+
+.section {
+    padding: var(--space-24) 0;
+    position: relative;
+    border-bottom: 1px solid var(--color-foundation);
+}
+
+.section-header {
+    margin-bottom: var(--space-16);
+    max-width: 700px;
+}
+
+/* Background Utility Classes */
+.bg-gray { background-color: var(--color-bg-alt); }
+.bg-dark { background-color: var(--color-text-main); color: white; border-bottom: none; }
+.bg-dark h2, .bg-dark p { color: white; }
+.bg-dark p { opacity: 0.8; }
+
+.bg-introduce { background-color: var(--color-introduce) !important; color: var(--color-text-main); }
+.bg-connect { background-color: var(--color-connect) !important; color: white; }
+.bg-expand { background-color: var(--color-expand) !important; color: white; }
+.bg-reflect { background-color: var(--color-reflect) !important; color: white; }
+
+/* --- 5. Navigation & Progress --- */
+#progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 12px;
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.6) 15%, transparent 40%),
+        radial-gradient(circle, rgba(0,0,0,0.2) 45%, transparent 55%),
+        linear-gradient(90deg, 
+            var(--color-introduce) 25%, 
+            var(--color-connect) 50%, 
+            var(--color-expand) 75%, 
+            var(--color-reflect) 100%);
+    background-size: 16px 12px, 16px 12px, 100% 100%;
+    box-shadow: inset 0 2px 3px rgba(255,255,255,0.5), inset 0 -2px 3px rgba(0,0,0,0.3);
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    width: 0%;
+    z-index: 9999;
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-foundation);
+    z-index: 1000;
+    padding: var(--space-4) 0;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.125rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.site-nav {
+    display: flex;
+    gap: var(--space-8);
+}
+
+.site-nav a {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.site-nav a:hover {
+    color: var(--color-text-main);
+}
+
+/* --- 6. Hero Section & Stack Graphic --- */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    border-bottom: none;
+    overflow: hidden;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-16);
+    align-items: center;
+}
+
+.hero .subtitle {
+    display: block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-expand);
+    margin-bottom: var(--space-4);
+}
+
+.hero .statement {
+    font-size: 1.35rem;
+    max-width: 550px;
+    margin-bottom: var(--space-8);
+}
+
+.cta-button {
+    display: inline-flex;
+    padding: var(--space-4) var(--space-8);
+    background-color: var(--color-text-main);
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: var(--radius-brick);
+    transition: all 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    background-color: var(--color-expand);
+    color: white;
+    box-shadow: var(--shadow-float);
+}
+
+/* The LEGO Brick Stack */
+.hero-visual {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px; /* Room for the top studs */
+}
+
+.brick-stack {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    /* Create a tight interlocking stack */
+    gap: 0;
+    margin-top: 2rem;
+    transform: perspective(1000px) rotateX(25deg) rotateY(-25deg);
+    transform-style: preserve-3d;
+}
+
+.brick {
+    width: 260px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+    
+    /* Base 3D geometry using borders */
+    background: currentColor; /* We set color to the element's actual background below */
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 2px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        inset 0 10px 15px rgba(255,255,255,0.2), 
+        inset 0 -10px 15px rgba(0,0,0,0.1),
+        3px 5px 8px rgba(0,0,0,0.15); /* Drop shadow from the whole block */
+}
+
+/* The studs on top of each brick */
+.brick::before {
+    content: '';
+    position: absolute;
+    top: -14px; /* Move above the top edge */
+    left: 20px;
+    right: 20px;
+    height: 14px; /* Stud height */
+    
+    /* Using radial gradients to draw the cylindrical studs */
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.6) 10%, transparent 40%),
+        radial-gradient(circle, currentColor 65%, transparent 68%);
+    background-size: 40px 14px, 40px 12px;
+    background-position: 0 0, 0 2px;
+    background-repeat: repeat-x;
+    background-color: transparent;
+    
+    /* Stud shading/borders */
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.2));
+    z-index: 10;
+}
+
+/* The right-side depth panel to give it 3D thickness */
+.brick::after {
+    content: '';
+    position: absolute;
+    top: -1px; /* Align with top border */
+    right: -15px; /* Extend to the right based on depth */
+    width: 15px; /* Depth of the brick */
+    height: 100%;
+    background-color: inherit;
+    background-blend-mode: multiply;
+    /* Create a darker shade for the side face using a semi-transparent black overlay */
+    background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25));
+    transform-origin: left;
+    transform: skewY(45deg);
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.brick:hover {
+    transform: translateY(-10px) translateZ(10px) scale(1.02);
+    box-shadow: 
+        inset 0 10px 15px rgba(255,255,255,0.3), 
+        inset 0 -10px 15px rgba(0,0,0,0.1),
+        5px 15px 15px rgba(0,0,0,0.2);
+    z-index: 20;
+}
+
+/* Target span to hold the text above the background gradient */
+.brick span {
+    position: relative;
+    z-index: 5;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Specific background colors for the bricks */
+.brick-foundation { 
+    background-color: var(--color-foundation); 
+    color: var(--color-foundation); 
+}
+.brick-foundation span { color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+
+.brick-introduce { 
+    background-color: var(--color-introduce); 
+    color: var(--color-introduce); 
+}
+.brick-introduce span { color: var(--color-text-main); text-shadow: 0 1px 0 rgba(255,255,255,0.5); }
+
+.brick-connect { 
+    background-color: var(--color-connect); 
+    color: var(--color-connect); 
+}
+.brick-connect span { color: white; }
+
+.brick-expand { 
+    background-color: var(--color-expand); 
+    color: var(--color-expand); 
+}
+.brick-expand span { color: white; }
+
+.brick-reflect { 
+    background-color: var(--color-reflect); 
+    color: var(--color-reflect); 
+}
+.brick-reflect span { color: white; }
+
+/* --- 7. The Model (What it is) --- */
+.model-explanation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16);
+    align-items: center;
+}
+
+.cycle-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    position: relative;
+    padding-left: var(--space-8);
+}
+
+/* Connecting line */
+.cycle-diagram::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background-color: var(--color-foundation);
+    z-index: 1;
+}
+
+.cycle-step {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.cycle-step .dot {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    left: -35px; /* Center over the 15px line track */
+    border: none;
+    box-shadow: none;
+    
+    /* 1x1 LEGO Brick styling */
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 2px solid rgba(0, 0, 0, 0.4);
+    box-shadow: 
+        inset 0 4px 6px rgba(255,255,255,0.2), 
+        inset 0 -4px 6px rgba(0,0,0,0.1),
+        3px 5px 8px rgba(0,0,0,0.15);
+        
+    transform-style: preserve-3d;
+    z-index: 10;
+}
+
+/* Sub-classes to set text color properly for radial gradient (stud) coloring */
+.cycle-step .dot.bg-introduce { color: var(--color-introduce); }
+.cycle-step .dot.bg-connect { color: var(--color-connect); }
+.cycle-step .dot.bg-expand { color: var(--color-expand); }
+.cycle-step .dot.bg-reflect { color: var(--color-reflect); }
+
+/* 1x1 stud for the timeline dots */
+.cycle-step .dot::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    margin-left: -10px;
+    width: 20px;
+    height: 6px;
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.6) 10%, transparent 40%),
+        radial-gradient(circle, currentColor 65%, transparent 68%);
+    background-size: 20px 6px, 20px 5px;
+    background-position: 0 0, 0 1px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+}
+
+/* 1x1 depth panel for timeline dots */
+.cycle-step .dot::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -8px;
+    width: 8px;
+    height: 100%;
+    background-color: inherit;
+    background-blend-mode: multiply;
+    background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25));
+    transform-origin: left;
+    transform: skewY(45deg);
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.cycle-step .step-text {
+    padding-left: var(--space-4);
+}
+
+.cycle-step h3 {
+    margin-bottom: 0;
+    font-size: 1.35rem;
+}
+
+.cycle-step p {
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+/* --- 8. Why Pacing (Insights Grid) --- */
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+}
+
+.insight-block {
+    padding: var(--space-8);
+    padding-top: calc(var(--space-8) + 16px);
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-foundation);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-float);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.insight-block:hover {
+    transform: translateY(-5px);
+}
+
+.insight-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 16px;
+    background-color: var(--color-bg-alt); /* fallback */
+    box-shadow: inset 0 3px 4px rgba(255,255,255,0.5), inset 0 -3px 4px rgba(0,0,0,0.15);
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.6) 15%, transparent 40%),
+        radial-gradient(circle, rgba(0,0,0,0.15) 50%, transparent 60%);
+    background-size: 24px 16px;
+    background-repeat: repeat-x;
+}
+.insight-block:nth-child(1)::before { background-color: var(--color-introduce); }
+.insight-block:nth-child(2)::before { background-color: var(--color-connect); }
+.insight-block:nth-child(3)::before { background-color: var(--color-reflect); }
+
+.insight-visual {
+    width: 64px;
+    height: 64px;
+    border-radius: 4px; /* Lego 2x2 plate shape */
+    background-color: var(--color-bg-alt);
+    margin-bottom: var(--space-4);
+    box-shadow: 
+        inset 0 3px 6px rgba(255,255,255,0.4), 
+        inset 0 -3px 6px rgba(0,0,0,0.15),
+        2px 4px 6px rgba(0,0,0,0.1);
+    /* 4 studs for 2x2 plate */
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.6) 15%, transparent 40%),
+        radial-gradient(circle, rgba(0,0,0,0.15) 45%, transparent 55%) !important;
+    background-size: 32px 32px !important;
+    background-repeat: repeat !important;
+}
+
+/* Geometric Concept Icons using CSS (Now mapped to 2x2 bricks) */
+.icon-load { background-color: var(--color-introduce); }
+.icon-retention { background-color: var(--color-connect); }
+.icon-confidence { background-color: var(--color-reflect); }
+
+/* --- 9. How It Builds (Mapping Icons) --- */
+.mapping-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-8);
+    column-gap: var(--space-16);
+}
+
+.mapping-item {
+    position: relative;
+    padding-left: 56px; /* Room for custom icons */
+    min-height: 48px;
+}
+
+/* Base style for the visual bullet */
+.mapping-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    background-color: var(--color-foundation);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.4), inset 0 -2px 2px rgba(0,0,0,0.1);
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.6) 15%, transparent 40%),
+        radial-gradient(circle, rgba(0,0,0,0.1) 45%, transparent 55%);
+    background-repeat: repeat;
+}
+
+/* 1. Brick (Single 2x2 Block) */
+.mapping-item:nth-child(1)::before {
+    width: 24px; height: 24px;
+    background-color: var(--color-introduce);
+    background-size: 12px 12px;
+}
+
+/* 2. Stack (Three blocks high) */
+.mapping-item:nth-child(2)::before {
+    width: 24px; height: 40px;
+    background: 
+        linear-gradient(to bottom, 
+            var(--color-introduce) 33%, 
+            var(--color-connect) 33% 66%, 
+            var(--color-expand) 66%);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,0.4), inset 0 -2px 2px rgba(0,0,0,0.2);
+}
+
+/* 3. Base Plate (Wide flat green) */
+.mapping-item:nth-child(3)::before {
+    width: 40px; height: 12px;
+    top: 12px;
+    background-color: var(--color-foundation);
+    background-size: 8px 12px;
+}
+
+/* 4. Connecting Pieces (Two interlocking) */
+.mapping-item:nth-child(4)::before {
+    width: 20px; height: 16px;
+    background-color: var(--color-connect);
+    background-size: 10px 16px;
+    box-shadow: 
+        inset 0 2px 2px rgba(255,255,255,0.4), 
+        inset 0 -2px 2px rgba(0,0,0,0.2),
+        10px 6px 0 var(--color-expand); /* Offset second block */
+}
+
+/* 5. Missing Brick (A gap in a stack) */
+.mapping-item:nth-child(5)::before {
+    width: 24px; height: 40px;
+    background: transparent;
+    border: 2px dashed var(--color-reflect);
+    box-shadow: none;
+}
+/* Bottom and top of the stack holding the gap */
+.mapping-item:nth-child(5)::after {
+    content: '';
+    position: absolute;
+    left: 2px; top: 7px;
+    width: 20px; height: 8px;
+    background-color: var(--color-foundation);
+    box-shadow: 0 24px 0 var(--color-foundation);
+}
+
+/* 6. Stable Build (Pyramid/sturdy) */
+.mapping-item:nth-child(6)::before {
+    width: 36px; height: 24px;
+    top: 10px;
+    background-color: transparent;
+    background-image:
+        linear-gradient(var(--color-introduce), var(--color-introduce)),
+        linear-gradient(var(--color-expand), var(--color-expand));
+    background-size:
+        12px 12px,
+        36px 12px;
+    background-position:
+        top center,
+        bottom center;
+    background-repeat: no-repeat;
+    filter: drop-shadow(2px 3px 3px rgba(0,0,0,0.2));
+    box-shadow: none;
+}
+.mapping-item:nth-child(6)::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px; width: 36px; height: 24px;
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.6) 15%, transparent 40%),
+        radial-gradient(circle, rgba(0,0,0,0.1) 45%, transparent 55%);
+    background-size: 12px 12px; 
+    background-repeat: repeat;
+    /* Clips the studs to only appear over the physical blocks */
+    clip-path: polygon(33.33% 0, 66.66% 0, 66.66% 50%, 100% 50%, 100% 100%, 0 100%, 0 50%, 33.33% 50%);
+    box-shadow: none;
+}
+
+/* --- 10. Experiments (Case Studies) --- */
+.case-studies {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.case-study {
+    background: var(--color-bg-base);
+    border: 1px solid var(--color-foundation);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-float);
+    transition: transform 0.2s;
+}
+
+.case-study:hover {
+    transform: scale(1.01);
+}
+
+.case-header {
+    padding: var(--space-4) var(--space-8);
+    position: relative;
+    /* Base bevel for thick LEGO baseplate bar */
+    box-shadow: inset 0 4px 6px rgba(255,255,255,0.3), inset 0 -4px 6px rgba(0,0,0,0.15);
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* Repeating studs for the large case headers */
+.case-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.3) 15%, transparent 40%),
+        radial-gradient(circle, rgba(0,0,0,0.1) 45%, transparent 55%);
+    background-size: 32px 32px;
+    background-repeat: repeat;
+    opacity: 0.9;
+    z-index: 0;
+}
+
+.case-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.case-body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* No gaps on grid, add borders instead for table feel */
+}
+
+.case-col {
+    padding: var(--space-8);
+    border-right: 1px solid var(--color-foundation);
+}
+.case-col:last-child {
+    border-right: none;
+}
+
+.case-col h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+.case-col p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+.highlight-learn {
+    background-color: var(--color-bg-alt);
+    position: relative;
+    padding-left: 24px; /* Room for the 16px LEGO bar */
+}
+
+.highlight-learn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0; width: 16px;
+    box-shadow: inset 2px 0 4px rgba(255,255,255,0.5), inset -2px 0 4px rgba(0,0,0,0.15);
+    background-image: 
+        radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.6) 15%, transparent 40%),
+        radial-gradient(circle, rgba(0,0,0,0.15) 50%, transparent 60%);
+    background-size: 16px 20px;
+    background-position: center 10px;
+    background-repeat: repeat-y;
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.case-study:nth-child(1) .highlight-learn::after { background-color: var(--color-introduce); }
+.case-study:nth-child(2) .highlight-learn::after { background-color: var(--color-connect); }
+.case-study:nth-child(3) .highlight-learn::after { background-color: var(--color-expand); }
+.case-study:nth-child(4) .highlight-learn::after { background-color: var(--color-reflect); }
+
+/* --- 11. Key Findings --- */
+.findings-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+}
+
+.finding-card {
+    padding: var(--space-8);
+    position: relative;
+    border-top: 2px solid var(--color-foundation);
+}
+
+.finding-number {
+    display: block;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--color-foundation);
+    margin-bottom: var(--space-4);
+    transition: color 0.3s;
+}
+
+.finding-card:hover .finding-number {
+    color: var(--color-text-main);
+}
+
+.finding-card h3 {
+    margin-bottom: var(--space-4);
+}
+
+/* --- 12. Apply the Model --- */
+.apply-container {
+    max-width: 800px;
+}
+
+.pull-quote {
+    padding: var(--space-8) 0;
+    margin: var(--space-8) 0;
+    border-top: 1px solid var(--color-foundation);
+    border-bottom: 1px solid var(--color-foundation);
+}
+
+.pull-quote blockquote {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    line-height: 1.3;
+    color: var(--color-expand);
+    font-weight: 500;
+    text-align: center;
+}
+
+/* --- 13. Footer / About Study --- */
+.site-footer {
+    padding: var(--space-16) 0 var(--space-8);
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-16);
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-16);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.meta-list {
+    list-style: none;
+    border-left: 2px solid var(--color-expand);
+    padding-left: var(--space-4);
+}
+
+.meta-list li {
+    margin-bottom: var(--space-2);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+}
+
+.meta-list strong {
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.85rem;
+    margin: 0;
+    color: rgba(255,255,255,0.5);
+}
+
+/* --- 14. Animations & JS Hooks --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger reveals for grids */
+.insights-grid .insight-block { transition-delay: 0.1s; }
+.insights-grid .insight-block:nth-child(2) { transition-delay: 0.2s; }
+.insights-grid .insight-block:nth-child(3) { transition-delay: 0.3s; }
+
+.findings-grid .finding-card { transition-delay: 0.1s; }
+.findings-grid .finding-card:nth-child(2) { transition-delay: 0.2s; }
+.findings-grid .finding-card:nth-child(3) { transition-delay: 0.3s; }
+
+/* --- 15. Responsive Design --- */
+@media (max-width: 1024px) {
+    .case-body { grid-template-columns: 1fr 1fr; }
+    .case-col { border-right: none; border-bottom: 1px solid var(--color-foundation); }
+    .case-col:nth-child(2) { border-right: none; }
+    .case-col:last-child { border-bottom: none; }
+    
+    .mapping-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 850px) {
+    .hero-container { grid-template-columns: 1fr; text-align: center; }
+    .hero .statement { margin: 0 auto var(--space-8); }
+    .hero-visual { margin-top: var(--space-8); }
+    .brick-stack { transform: perspective(1000px) rotateX(10deg) rotateY(0deg); }
+    
+    .model-explanation { grid-template-columns: 1fr; }
+    .cycle-diagram { flex-direction: row; flex-wrap: wrap; padding-left: 0; gap: var(--space-8); }
+    .cycle-diagram::before { display: none; }
+    .cycle-step { width: calc(50% - var(--space-4)); padding-left: 0; }
+    .cycle-step .dot { position: static; margin-bottom: var(--space-2); }
+    .cycle-step .step-text { padding-left: 0; }
+    
+    .insights-grid, .findings-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .site-nav { display: none; } /* Simplified mobile header */
+    .section { padding: var(--space-16) 0; }
+    .hero { min-height: auto; padding-top: var(--space-8); }
+    h1 { font-size: 2.25rem; }
+    .pull-quote blockquote { font-size: 1.5rem; }
+    .case-body { grid-template-columns: 1fr; }
+}

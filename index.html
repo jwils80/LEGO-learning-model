@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The LEGO Learning Model - A Research Artifact</title>
+    <meta name="description" content="An investigation into how pacing, sequencing, and structured progression influence comprehension using a LEGO visual metaphor.">
+    <!-- Google Fonts: Inter for readabiltiy, Outfit for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Progress Indicator -->
+    <div id="progress-bar" aria-hidden="true"></div>
+
+    <!-- 1. HERO & NAVIGATION -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">LEGO Study Prototype</div>
+            <nav class="site-nav" aria-label="Main Navigation">
+                <a href="#what">The Model</a>
+                <a href="#why">Why Pacing</a>
+                <a href="#how">How It Builds</a>
+                <a href="#experiments">Experiments</a>
+                <a href="#findings">Findings</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Content Section -->
+        <section class="hero section reveal" aria-labelledby="hero-title">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="subtitle">Building Knowledge, One Brick at a Time</span>
+                    <h1 id="hero-title" class="title">The LEGO Learning Model:<br>Building Understanding in Layers</h1>
+                    <p class="statement">This project investigates how pacing, sequencing, and structured progression influence comprehension, retention, and learner confidence.</p>
+                    <a href="#what" class="cta-button">Explore the Framework</a>
+                </div>
+                
+                <!-- Main Stacked Block Visual -->
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="brick-stack">
+                        <div class="brick brick-reflect"><span>Reflect</span></div>
+                        <div class="brick brick-expand"><span>Expand</span></div>
+                        <div class="brick brick-connect"><span>Connect</span></div>
+                        <div class="brick brick-introduce"><span>Introduce</span></div>
+                        <div class="brick brick-foundation"><span>Foundation</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. WHAT THE MODEL IS -->
+        <section id="what" class="section reveal bg-gray" aria-labelledby="what-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="what-title">What is the LEGO Model?</h2>
+                    <p class="lead">LEGO: <strong>Learning in Evolving Guided Order</strong>.</p>
+                </div>
+                <div class="model-explanation">
+                    <div class="text-content">
+                        <p>The LEGO framework functions as a pacing-based pedagogical model. Rather than presenting all conceptual information at once, it deliberately structures cognitive intake sequentially, simulating the process of building a complex form from precise, interlocking units.</p>
+                        <p>This staged release ensures that the learner maintains firm conceptual footing at each layer before the overarching complexity is increased.</p>
+                    </div>
+                    <!-- Visual Diagram of the Cycle -->
+                    <div class="cycle-diagram" aria-label="Diagram of the four stages of the LEGO learning cycle: Introduce, Connect, Expand, Reflect.">
+                        <div class="cycle-step">
+                            <div class="dot bg-introduce"></div>
+                            <div class="step-text">
+                                <h3>Introduce</h3>
+                                <p>New Information</p>
+                            </div>
+                        </div>
+                        <div class="cycle-step">
+                            <div class="dot bg-connect"></div>
+                            <div class="step-text">
+                                <h3>Connect</h3>
+                                <p>Reinforcement</p>
+                            </div>
+                        </div>
+                        <div class="cycle-step">
+                            <div class="dot bg-expand"></div>
+                            <div class="step-text">
+                                <h3>Expand</h3>
+                                <p>Deep Understanding</p>
+                            </div>
+                        </div>
+                        <div class="cycle-step">
+                            <div class="dot bg-reflect"></div>
+                            <div class="step-text">
+                                <h3>Reflect</h3>
+                                <p>Evaluation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. WHY PACING MATTERS -->
+        <section id="why" class="section reveal" aria-labelledby="why-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="why-title">Why Pacing Matters</h2>
+                    <p class="lead">Managing cognitive load is structural, not optional.</p>
+                </div>
+                <!-- Highlighted Insights Cards -->
+                <div class="insights-grid">
+                    <div class="insight-block">
+                        <div class="insight-visual icon-load" aria-hidden="true"></div>
+                        <h3>Cognitive Load</h3>
+                        <p>When too much unstructured information is presented simultaneously, the working memory overflows, leading to a rapid saturation point where no further meaningful schema construction occurs.</p>
+                    </div>
+                    <div class="insight-block">
+                        <div class="insight-visual icon-retention" aria-hidden="true"></div>
+                        <h3>Retention Mechanics</h3>
+                        <p>Spaced pacing allows the brain to encode memories more effectively. Information built block-by-block connects firmly to prior schemas, enhancing long-term structural retention.</p>
+                    </div>
+                    <div class="insight-block">
+                        <div class="insight-visual icon-confidence" aria-hidden="true"></div>
+                        <h3>Learner Confidence</h3>
+                        <p>Small, sequential wins increase self-efficacy. By pacing information appropriately and rewarding stable connections, the learner always feels capable of handling the next "brick" of complexity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. HOW LEARNING BUILDS -->
+        <section id="how" class="section reveal bg-gray" aria-labelledby="how-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="how-title">How Learning Builds</h2>
+                    <p class="lead">Translating visual aesthetics into cognitive meaning.</p>
+                    <p>The metaphor of building blocks serves as a perfect map for understanding pedagogical constructs.</p>
+                </div>
+                <!-- Concept Mapping Section -->
+                <div class="mapping-container">
+                    <dl class="mapping-list">
+                        <div class="mapping-item">
+                            <dt class="map-term">Brick</dt>
+                            <dd class="map-def">A single, digestible unit of new information.</dd>
+                        </div>
+                        <div class="mapping-item">
+                            <dt class="map-term">Stack</dt>
+                            <dd class="map-def">The logical progression and sequencing of concepts.</dd>
+                        </div>
+                        <div class="mapping-item">
+                            <dt class="map-term">Base Plate</dt>
+                            <dd class="map-def">Prior operational knowledge and foundational understanding.</dd>
+                        </div>
+                        <div class="mapping-item">
+                            <dt class="map-term">Connecting Pieces</dt>
+                            <dd class="map-def">The explicit cognitive relationships formed between disparate ideas.</dd>
+                        </div>
+                        <div class="mapping-item">
+                            <dt class="map-term">Missing Brick</dt>
+                            <dd class="map-def">A localized knowledge gap that compromises the stability of the entire structure.</dd>
+                        </div>
+                        <div class="mapping-item">
+                            <dt class="map-term">Stable Build</dt>
+                            <dd class="map-def">Retained, robust comprehension that withstands interrogation.</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. EXPERIMENTS -->
+        <section id="experiments" class="section reveal" aria-labelledby="experiments-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="experiments-title">Project Experiments</h2>
+                    <p class="lead">Investigating pacing mechanics through controlled, focused interventions.</p>
+                </div>
+                <!-- Case Study Sections -->
+                <div class="case-studies">
+                    
+                    <article class="case-study">
+                        <div class="case-header bg-introduce">
+                            <h3>01 / Saturation Test</h3>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-col">
+                                <h4>What Was Tested</h4>
+                                <p>The upper limit of continuous information intake before the onset of comprehension degradation.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Changed</h4>
+                                <p>We manipulated the volume of "bricks" delivered consecutively without a structural "reflection" break.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Happened</h4>
+                                <p>Learner recall plummeted dramatically after 4 consecutive new concepts, indicating rapid cognitive overflow.</p>
+                            </div>
+                            <div class="case-col highlight-learn">
+                                <h4>What I Learned</h4>
+                                <p>Reflection periods are mandatory mortar. Stacking bricks too high without giving them time to set causes total collapse.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="case-study">
+                        <div class="case-header bg-connect">
+                            <h3>02 / AI Extraneous Load Reduction</h3>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-col">
+                                <h4>What Was Tested</h4>
+                                <p>Using AI to actively pre-digest and strip away decorative narrative from instructional materials.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Changed</h4>
+                                <p>Presenting isolated, clear, block-level core concepts versus traditional, verbose, descriptive textbook paragraphs.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Happened</h4>
+                                <p>Time-to-comprehension decreased by roughly 35% when the extraneous narrative load was removed entirely.</p>
+                            </div>
+                            <div class="case-col highlight-learn">
+                                <h4>What I Learned</h4>
+                                <p>Clarity itself is a form of pacing. Reducing noise allows the learner's energy to focus entirely on the core "brick."</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="case-study">
+                        <div class="case-header bg-expand">
+                            <h3>03 / Metaphor vs Functional Link Test</h3>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-col">
+                                <h4>What Was Tested</h4>
+                                <p>Whether metaphorical framing (like a LEGO brick system) improves concept retention better than dry, functional descriptions.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Changed</h4>
+                                <p>Taught identical complex concepts to separate cohorts using two radically different narrative framings.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Happened</h4>
+                                <p>Metaphorical framing provided immediately accessible structural schemas, remarkably improving connection speeds.</p>
+                            </div>
+                            <div class="case-col highlight-learn">
+                                <h4>What I Learned</h4>
+                                <p>Strong visuals and metaphors act as pre-existing "base plates." They give new, unfamiliar information an immediate place to snap into.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="case-study">
+                        <div class="case-header bg-reflect">
+                            <h3>04 / Osmotic Pressure &amp; Stress Test</h3>
+                        </div>
+                        <div class="case-body">
+                            <div class="case-col">
+                                <h4>What Was Tested</h4>
+                                <p>The direct impact of induced environmental/temporal stress on phased, structural learning retention.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Changed</h4>
+                                <p>Introduced heavy time constraints explicitly during the "Connect" phase of the learning cycle.</p>
+                            </div>
+                            <div class="case-col">
+                                <h4>What Happened</h4>
+                                <p>Rushing the connection phase completely prevented concepts from stabilizing, mirroring cellular osmotic stress responses.</p>
+                            </div>
+                            <div class="case-col highlight-learn">
+                                <h4>What I Learned</h4>
+                                <p>Pacing cannot be artificially accelerated at critical structural joints without compromising the integrity of the entire build.</p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. KEY FINDINGS -->
+        <section id="findings" class="section reveal bg-gray" aria-labelledby="findings-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="findings-title">Key Findings</h2>
+                    <p class="lead">Synthesizing the core insights of the research operation.</p>
+                </div>
+                <!-- Finding Cards -->
+                <div class="findings-grid">
+                    <div class="finding-card">
+                        <span class="finding-number" aria-hidden="true">01</span>
+                        <h3>Pacing Overwhelms Complexity</h3>
+                        <p>Even highly complex, structurally dense concepts can be mastered effectively if the sequencing is paced appropriately. The complexity of the subject matter is secondary to the quality of the pacing.</p>
+                    </div>
+                    <div class="finding-card">
+                        <span class="finding-number" aria-hidden="true">02</span>
+                        <h3>Reflection is Structural</h3>
+                        <p>Without deliberate reflection phases to integrate new data, stacked information is unstable and degrades exponentially over time. Reflection is not a bonus activity; it is the mortar of learning.</p>
+                    </div>
+                    <div class="finding-card">
+                        <span class="finding-number" aria-hidden="true">03</span>
+                        <h3>Schemas Require Anchors</h3>
+                        <p>New knowledge <em>must</em> affix to existing prior knowledge ("base plates") to minimize extraneous cognitive load. Information presented in isolation fundamentally fails to adhere.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. APPLY THE MODEL -->
+        <section id="apply" class="section reveal" aria-labelledby="apply-title">
+            <div class="container apply-container">
+                <div class="section-header">
+                    <h2 id="apply-title">Applying the Framework</h2>
+                    <p class="lead">Translating theoretical findings into practical design.</p>
+                </div>
+                <div class="apply-content">
+                    <p class="large-text">The LEGO model extends beyond theoretical observation—it functions as an operative pedagogical tool. It can be successfully implemented in instructional design, software onboarding flows, syllabus construction, and dedicated self-study operations.</p>
+                    <div class="pull-quote">
+                        <blockquote>
+                            &quot;What is the next operational brick, and does it have a stable schema to snap onto?&quot;
+                        </blockquote>
+                    </div>
+                    <p>By consciously returning to this anchor question, instructional architects and independent learners alike can systematically reduce friction and dramatically elevate the fidelity of knowledge transfer.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 8. ABOUT THE STUDY (Footer Context) -->
+    <footer class="site-footer bg-dark reveal">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>About the Study</h2>
+                    <p>This artifact visually synthesizes qualitative research, iterative experiments, and structured reflection derived from a comprehensive course investigation into educational pacing.</p>
+                    <p>It translates raw operational dashboard data and logs into a coherent, visual explanatory artifact designed to demonstrate the mechanics of layered comprehension.</p>
+                </div>
+                <div class="about-meta">
+                    <ul class="meta-list">
+                        <li><strong>Artifact Type:</strong> Editorial Explainer</li>
+                        <li><strong>Core Topic:</strong> Cognitive Load &amp; Sequencing</li>
+                        <li><strong>Model Metaphor:</strong> LEGO Bricks</li>
+                        <li><strong>Status:</strong> Final Synthesis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 The LEGO Learning Model Investigation. Developed for educational course evaluation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Layer -->
+    <script src="script.js"></script>
+</body>
+</html>
